@@ -27,3 +27,10 @@ config_updater:
     # Update the plugin configmap whenever plugins.yaml changes
     config/prow/plugins.yaml:
       name: plugin
+
+approve:
+- repos: 
+  - chaos-mesh
+  commandHelpLink: https://prow.chaos-mesh.dev/command-help
+  require_self_approval: true
+  lgtm_acts_as_approve: true
