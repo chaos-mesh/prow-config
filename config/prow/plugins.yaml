@@ -3,23 +3,23 @@
 plugins:
   chaos-mesh:
     plugins:
-    - approve
-    - assign
-    - blunderbuss
-    - cat
-    - dog
-    - help
-    - heart
-    - hold
-    - label
-    - lgtm
-    - trigger
-    - verify-owners
-    - wip
-    - yuks
+      - approve
+      - assign
+      - blunderbuss
+      - cat
+      - dog
+      - help
+      - heart
+      - hold
+      - label
+      - lgtm
+      - trigger
+      - verify-owners
+      - wip
+      - yuks
   chaos-mesh/prow-config:
     plugins:
-    - config-updater
+      - config-updater
 
 config_updater:
   maps:
@@ -31,8 +31,16 @@ config_updater:
       name: plugins
 
 approve:
-- repos: 
-  - chaos-mesh
-  commandHelpLink: https://prow.chaos-mesh.dev/command-help
-  require_self_approval: true
-  lgtm_acts_as_approve: true
+  - repos:
+      - chaos-mesh
+    commandHelpLink: https://prow.chaos-mesh.dev/command-help
+    require_self_approval: true
+    lgtm_acts_as_approve: true
+
+external_plugins:
+  chaos-mesh/chaos-mesh:
+    - name: cherrypicker
+      events:
+        - issue_comment
+        - pull_request
+      endpoint: http://cherrypicker

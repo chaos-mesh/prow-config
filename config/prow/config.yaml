@@ -6,34 +6,34 @@ in_repo_config:
     "*": true
 
 deck:
- spyglass:
-   lenses:
-   - lens:
-       name: metadata
-     required_files:
-     - started.json|finished.json
-   - lens:
-       config:
-       name: buildlog
-     required_files:
-     - build-log.txt
-   - lens:
-       name: junit
-     required_files:
-     - .*/junit.*\.xml
-   - lens:
-       name: podinfo
-     required_files:
-     - podinfo.json
+  spyglass:
+    lenses:
+      - lens:
+          name: metadata
+        required_files:
+          - started.json|finished.json
+      - lens:
+          config:
+          name: buildlog
+        required_files:
+          - build-log.txt
+      - lens:
+          name: junit
+        required_files:
+          - .*/junit.*\.xml
+      - lens:
+          name: podinfo
+        required_files:
+          - podinfo.json
 
 plank:
   job_url_prefix_config:
     "*": https://prow.chaos-mesh.dev/view/
   report_templates:
-    '*': >-
-        [Full PR test history](https://prow.chaos-mesh.dev/pr-history?org={{.Spec.Refs.Org}}&repo={{.Spec.Refs.Repo}}&pr={{with index .Spec.Refs.Pulls 0}}{{.Number}}{{end}}).
-        [Your PR dashboard](https://prow.chaos-mesh.dev/pr?query=is:pr+state:open+author:{{with
-        index .Spec.Refs.Pulls 0}}{{.Author}}{{end}}).
+    "*": >-
+      [Full PR test history](https://prow.chaos-mesh.dev/pr-history?org={{.Spec.Refs.Org}}&repo={{.Spec.Refs.Repo}}&pr={{with index .Spec.Refs.Pulls 0}}{{.Number}}{{end}}).
+      [Your PR dashboard](https://prow.chaos-mesh.dev/pr?query=is:pr+state:open+author:{{with
+      index .Spec.Refs.Pulls 0}}{{.Author}}{{end}}).
   default_decoration_configs:
     "*":
       gcs_configuration:
@@ -48,25 +48,25 @@ plank:
 
 tide:
   queries:
-  - labels:
-    - lgtm
-    - approved
-    missingLabels:
-    - needs-rebase
-    - do-not-merge/hold
-    - do-not-merge/work-in-progress
-    - do-not-merge/invalid-owners-file
-    orgs:
-    - chaos-mesh
+    - labels:
+        - lgtm
+        - approved
+      missingLabels:
+        - needs-rebase
+        - do-not-merge/hold
+        - do-not-merge/work-in-progress
+        - do-not-merge/invalid-owners-file
+      orgs:
+        - chaos-mesh
   merge_method:
     chaos-mesh: squash
 
 decorate_all_jobs: true
 periodics:
-- interval: 60m
-  agent: kubernetes
-  name: echo-test
-  spec:
-    containers:
-    - image: alpine
-      command: ["/bin/date"]
+  - interval: 60m
+    agent: kubernetes
+    name: echo-test
+    spec:
+      containers:
+        - image: alpine
+          command: ["/bin/date"]
