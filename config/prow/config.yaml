@@ -58,7 +58,8 @@ tide:
     - do-not-merge/invalid-owners-file
     orgs:
     - chaos-mesh
-  merge_method: squash
+  merge_method:
+    chaos-mesh: squash
 
 decorate_all_jobs: true
 periodics:
