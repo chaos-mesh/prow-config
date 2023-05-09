@@ -1,0 +1,36 @@
+plugins:
+  chaos-mesh:
+    plugins:
+    - approve
+    - assign
+    - blunderbuss
+    - cat
+    - dog
+    - help
+    - heart
+    - hold
+    - label
+    - lgtm
+    - trigger
+    - verify-owners
+    - wip
+    - yuks
+  chaos-mesh/prow-config:
+    plugins:
+    - config-updater
+
+config_updater:
+  maps:
+    # Update the config configmap whenever config.yaml changes
+    config/prow/config.yaml:
+      name: config
+    # Update the plugin configmap whenever plugins.yaml changes
+    config/prow/plugins.yaml:
+      name: plugin
+
+approve:
+- repos: 
+  - chaos-mesh
+  commandHelpLink: https://prow.chaos-mesh.dev/command-help
+  require_self_approval: true
+  lgtm_acts_as_approve: true
